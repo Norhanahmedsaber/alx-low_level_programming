@@ -1,27 +1,28 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * _strpbrk - bytes
- * @s: pointer to char
- * @accept: pointer to char
- * Return: NULL
- */
+* _strspn - Gets the length of a prefix substring.
+* @s: String where substring will look.
+* @accept: Substring of accepted chars.
+* Return: Length of occurrence.
+*/
 
-char *_strpbrk(char *s, char *accept)
+unsigned int _strspn(char *s, char *accept)
 {
-int i;
+unsigned int c = 0;
+char *t = accept;
 
-while (*s)
+while (*s++)
 {
-for (i = 0; accept[i]; i++)
+while (*accept++)
+if (*(s - 1) == *(accept - 1))
 {
-if (*s == accept[i])
-{
-return (s);
+c++;
+break;
 }
+if (!(*--accept))
+break;
+accept = t;
 }
-s++;
-}
-return (NULL);
+return (c);
 }
